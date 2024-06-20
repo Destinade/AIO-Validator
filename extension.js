@@ -22,8 +22,6 @@ function activate(context) {
 	const disposable = vscode.commands.registerCommand(
 		"code-validator.checkNelson",
 		function () {
-			// The code you place here will be executed every time your command is executed
-
 			// Display a message box to the user
 			vscode.window.showInformationMessage("Hello 2!");
 			const { activeTextEditor } = vscode.window;
@@ -31,27 +29,24 @@ function activate(context) {
 				console.log("Editor could not be found!");
 				return;
 			}
+			vscode.window.showInformationMessage("He is this:" + he);
+			console.log();
 
-			let disposable = vscode.commands.registerCommand(
-				"extension.htmlEntities",
-				function () {
-					var editor = vscode.window.activeTextEditor;
+			var editor = vscode.window.activeTextEditor;
 
-					if (!editor) {
-						return; // No open text editor
-					}
+			if (!editor) {
+				return; // No open text editor
+			}
 
-					var selection = editor.selection;
-					var text = editor.document.getText(selection);
+			var selection = editor.selection;
+			var text = editor.document.getText(selection);
 
-					editor.edit((builder) => {
-						builder.replace(
-							selection,
-							he.encode(text, { useNamedReferences: true })
-						);
-					});
-				}
-			);
+			editor.edit((builder) => {
+				builder.replace(
+					selection,
+					he.encode(text, { useNamedReferences: true })
+				);
+			});
 
 			// const whatsup = vscode.extensions.getExtension(
 			// 	"christopherstyles.html-entities"
