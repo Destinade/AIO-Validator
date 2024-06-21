@@ -1,8 +1,10 @@
 {
+	"publisher": "Destinade",
 	"name": "code-validator",
 	"displayName": "Code Validator",
 	"description": "Validates the HTML code with more complex methods.",
-	"version": "0.0.1",
+	"icon": "assets/images/destinade-icon.png",
+	"version": "0.5.2",
 	"engines": {
 		"vscode": "^1.90.0"
 	},
@@ -34,6 +36,8 @@
 		"typescript": "^5.4.5"
 	},
 	"dependencies": {
-		"he": "^1.2.0"
+		"he": "^1.2.0",
+		"html-entities": "^2.5.2",
+		"htmlhint": "^1.1.4"
 	}
 }

@@ -1,5 +1,3 @@
-# AIO Validator
-
 # AIO HTML Validator
 
 Option 1 - Local program: similar to the current HTML validator.<br>
