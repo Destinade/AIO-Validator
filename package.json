@@ -4,7 +4,7 @@
 	"displayName": "Code Validator",
 	"description": "Validates the HTML code with more complex methods.",
 	"icon": "assets/images/destinade-icon.png",
-	"version": "0.5.2",
+	"version": "0.2.3",
 	"engines": {
 		"vscode": "^1.90.0"
 	},
@@ -38,6 +38,7 @@
 	"dependencies": {
 		"he": "^1.2.0",
 		"html-entities": "^2.5.2",
-		"htmlhint": "^1.1.4"
+		"htmlhint": "^1.1.4",
+		"htmlparser2": "^9.1.0"
 	}
 }
