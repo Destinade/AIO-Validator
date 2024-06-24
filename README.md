@@ -9,7 +9,6 @@ Option 3 - Chrome extension.<br>
 ### In development:
 
 On top of all the HTML Validator checks+<br>
-4 hours = Checks if there are unused scripts.<br>
 4 hours = Checks if the document follows best practices (filenames etc.)<br>
 12 hours = Crosschecks consistency errors against the word manuscript file and markup (italic and bold words etc.)<br>
 8 hours = Checks if all images are sized appropriately.<br>
@@ -18,6 +17,7 @@ On top of all the HTML Validator checks+<br>
 ### Completed:
 
 **_Priority_** 6 hours = Checks if non-converted HTML entities are in markup.<br>
+4 hours = Checks if there are unused scripts.<br>
 
 ## Total Time Needed:
 
