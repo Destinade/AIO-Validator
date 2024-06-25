@@ -1,10 +1,10 @@
 {
 	"publisher": "Destinade",
-	"name": "code-validator",
-	"displayName": "Code Validator",
+	"name": "nellie",
+	"displayName": "Validator Nellie",
 	"description": "Validates the HTML code with more complex methods.",
-	"icon": "assets/images/destinade-icon.png",
-	"version": "0.3.1",
+	"icon": "src/assets/images/nellie-icon.png",
+	"version": "0.5.3",
 	"engines": {
 		"vscode": "^1.90.0"
 	},
@@ -12,12 +12,28 @@
 		"Other"
 	],
 	"activationEvents": [],
-	"main": "./extension.js",
+	"main": "./src/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "code-validator.checkNelson",
-				"title": "Nelson Validator"
+				"command": "nellie.checkAll",
+				"title": "Nelson Complete Validator"
+			},
+			{
+				"command": "nellie.checkHTML",
+				"title": "Nelson HTML Validator"
+			},
+			{
+				"command": "nellie.checkEntities",
+				"title": "Nelson Entity Validator"
+			},
+			{
+				"command": "nellie.checkArt",
+				"title": "Nelson Art Validator"
+			},
+			{
+				"command": "nellie.crossCheck",
+				"title": "Nelson Cross Checker"
 			}
 		]
 	},
@@ -34,5 +50,8 @@
 		"@vscode/test-electron": "^2.4.0",
 		"eslint": "^8.57.0",
 		"typescript": "^5.4.5"
+	},
+	"dependencies": {
+		"htmlhint": "^1.1.4"
 	}
 }

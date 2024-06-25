@@ -3,9 +3,12 @@ const vscode = require("vscode");
 const highlightNonBasicASCII = require("./utils/highlightNonBasicASCII");
 const entityChecker = require("./utils/entityChecker");
 const hoverDisposable = require("./utils/hoverDisposable");
+const htmlValidation = require("./utils/htmlValidation");
+
+let diagnosticCollection;
 
 function activate(context) {
-	console.log("Unicode Highlighter is active.");
+	diagnosticCollection = vscode.languages.createDiagnosticCollection("html");
 
 	vscode.window.onDidChangeTextEditorSelection((event) => {
 		highlightNonBasicASCII(event.textEditor);
@@ -35,15 +38,25 @@ function activate(context) {
 		// Add more entities as needed
 	};
 
-	const disposable = vscode.commands.registerCommand(
-		"code-validator.checkNelson",
+	const checkMarkup = vscode.commands.registerCommand("nellie.checkHTML", () =>
+		htmlValidation(diagnosticCollection)
+	);
+
+	const checkEntities = vscode.commands.registerCommand(
+		"nellie.checkEntities",
 		() => entityChecker(htmlEntities)
 	);
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(checkMarkup);
+	context.subscriptions.push(checkEntities);
+	context.subscriptions.push(diagnosticCollection);
 }
 
-function deactivate() {}
+function deactivate() {
+	if (diagnosticCollection) {
+		diagnosticCollection.dispose();
+	}
+}
 
 module.exports = {
 	activate,
