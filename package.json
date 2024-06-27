@@ -4,14 +4,21 @@
 	"displayName": "Validator Nellie",
 	"description": "Validates the HTML code with more complex methods.",
 	"icon": "src/assets/images/nellie-icon.png",
-	"version": "0.5.3",
+	"version": "0.5.6",
 	"engines": {
 		"vscode": "^1.90.0"
 	},
 	"categories": [
-		"Other"
+		"Linters",
+		"Formatters"
 	],
-	"activationEvents": [],
+	"qna": "false",
+	"bugs": {
+		"email": "support@destinade.com"
+	},
+	"activationEvents": [
+		"onLanguage:html"
+	],
 	"main": "./src/extension.js",
 	"contributes": {
 		"commands": [

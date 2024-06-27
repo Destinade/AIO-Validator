@@ -1,5 +1,6 @@
 const vscode = require("vscode");
 const HTMLHint = require("htmlhint").HTMLHint;
+const headingsChecker = require("./headingsChecker");
 
 function htmlValidation(diagnosticCollection) {
 	const editor = vscode.window.activeTextEditor;
@@ -14,7 +15,17 @@ function htmlValidation(diagnosticCollection) {
 
 	if (messages.length === 0) {
 		diagnosticCollection.clear();
-		vscode.window.showInformationMessage("No HTML errors found.");
+		vscode.window
+			.showInformationMessage(
+				"No HTML errors found. Do you want to check for heading hierarchy?",
+				"Yes",
+				"No"
+			)
+			.then((selection) => {
+				if (selection === "Yes") {
+					headingsChecker(diagnosticCollection);
+				}
+			});
 		return;
 	}
 
