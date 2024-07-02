@@ -27,7 +27,7 @@ Validates the markup, checks the heading hierarchy, and verifies if there are an
 Checks if there are any non-basic ASCII characters within the 'p' tags and prompts you to convert them to Unicode.
 
 <div align="center">
-    <strong>Art Checker (WIP)</strong>
+    <strong>Art Checker</strong>
 </div>
 Checks if the referenced art meets required specifications such as size, height, and width.
 
@@ -43,20 +43,20 @@ Initiating 2 concurrent instances should not be allowed.<br>
 
 ### Planned
 
-On top of all the HTML Validator checks +<br>
 6 hours = Checks if the document follows best practices (e.g., filenames).<br>
 8 hours = Cross-checks consistency errors against the word manuscript file and markup (e.g., italic and bold words).<br>
-8 hours = Checks if all images are sized appropriately.<br>
 8 hours = Defaults the formatting to nelson.workspace when the language is HTML.<br>
 
 ### In Progress
 
-6 hours = Checks if there are unused scripts.<br>
+6 hours = Checks for missing and unused scripts.<br>
 
 ### Completed
 
+On top of all the HTML Validator checks +<br>
 8 hours = Checks if non-converted HTML entities are in the markup.<br>
 4 hours = Checks the heading hierarchy (avoids the media player issue).<br>
+8 hours = Checks if all images are sized appropriately.<br>
 
 ## Total Time Needed
 

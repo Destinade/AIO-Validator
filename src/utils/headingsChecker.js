@@ -1,5 +1,6 @@
 const vscode = require("vscode");
 const scriptChecker = require("./scriptChecker");
+const cheerio = require("cheerio");
 
 function headingsChecker(diagnosticCollection) {
 	const headingRegex = /<h([1-6])\b[^>]*>(.*?)<\/h\1>/g;
@@ -42,7 +43,8 @@ function headingsChecker(diagnosticCollection) {
 			)
 			.then((selection) => {
 				if (selection === "Yes") {
-					scriptChecker(diagnosticCollection);
+					const $ = cheerio.load(text);
+					scriptChecker($);
 				}
 			});
 	}

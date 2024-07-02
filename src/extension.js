@@ -54,6 +54,7 @@ function activate(context) {
 
 	context.subscriptions.push(checkMarkup);
 	context.subscriptions.push(checkEntities);
+	context.subscriptions.push(checkArt);
 	context.subscriptions.push(diagnosticCollection);
 }
 
