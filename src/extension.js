@@ -1,9 +1,10 @@
 const vscode = require("vscode");
 
 const highlightNonBasicASCII = require("./utils/highlightNonBasicASCII");
-const entityChecker = require("./utils/entityChecker");
 const hoverDisposable = require("./utils/hoverDisposable");
 const htmlValidation = require("./utils/htmlValidation");
+const entityChecker = require("./utils/entityChecker");
+const artChecker = require("./utils/artChecker");
 
 let diagnosticCollection;
 
@@ -45,6 +46,10 @@ function activate(context) {
 	const checkEntities = vscode.commands.registerCommand(
 		"nellie.checkEntities",
 		() => entityChecker(htmlEntities)
+	);
+
+	const checkArt = vscode.commands.registerCommand("nellie.checkArt", () =>
+		artChecker()
 	);
 
 	context.subscriptions.push(checkMarkup);

@@ -17,22 +17,22 @@
 ## Features
 
 <div align="center">
-**HTML Validation**
+    <strong>HTML Validation</strong>
 </div>
 Validates the markup, checks the heading hierarchy, and verifies if there are any unused scripts.
 
 <div align="center">
-**Entity Checker**
+    <strong>Entity Checker</strong>
 </div>
 Checks if there are any non-basic ASCII characters within the 'p' tags and prompts you to convert them to Unicode.
 
 <div align="center">
-**Art Checker (WIP)**
+    <strong>Art Checker (WIP)</strong>
 </div>
 Checks if the referenced art meets required specifications such as size, height, and width.
 
 <div align="center">
-**Cross Checker (WIP)**
+    <strong>Cross Checker (WIP)</strong>
 </div>
 Prompts you to select a manuscript file and confirms if all text is converted correctly. Checks for italic and bold formats and ensures the paragraphs are complete and without any punctuation errors.
 
