@@ -31,7 +31,7 @@ function headingsChecker(diagnosticCollection) {
 
 	if (diagnostics.length > 0) {
 		vscode.window.showWarningMessage(
-			"Heading hierarchy issues found. Check the Problems panel for details."
+			"Heading hierarchy issues found. Please check the problems window: Ctrl + Shift + M to open."
 		);
 	} else {
 		diagnosticCollection.clear();
@@ -44,7 +44,7 @@ function headingsChecker(diagnosticCollection) {
 			.then((selection) => {
 				if (selection === "Yes") {
 					const $ = cheerio.load(text);
-					scriptChecker($);
+					scriptChecker(diagnosticCollection, $);
 				}
 			});
 	}

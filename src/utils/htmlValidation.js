@@ -2,7 +2,12 @@ const vscode = require("vscode");
 const HTMLHint = require("htmlhint").HTMLHint;
 const headingsChecker = require("./headingsChecker");
 
-function htmlValidation(diagnosticCollection) {
+function htmlValidation(diagnosticCollection, isInProgress) {
+	if (isInProgress) {
+		vscode.window.showWarningMessage("HTML validation is already in progress.");
+		return;
+	}
+
 	const editor = vscode.window.activeTextEditor;
 	if (!editor) {
 		vscode.window.showErrorMessage("No active text editor.");
@@ -48,7 +53,9 @@ function htmlValidation(diagnosticCollection) {
 
 	diagnosticCollection.set(document.uri, diagnostics);
 
-	vscode.window.showWarningMessage(`${messages.length} HTML errors found.`);
+	vscode.window.showWarningMessage(
+		`${messages.length} HTML errors found. Please check the problems window: Ctrl + Shift + M to open.`
+	);
 }
 
 module.exports = htmlValidation;

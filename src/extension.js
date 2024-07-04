@@ -10,8 +10,6 @@ const updateWorkspaceSettings = require("./utils/workspaceSettings.js");
 let diagnosticCollection;
 
 function activate(context) {
-	updateWorkspaceSettings();
-
 	diagnosticCollection = vscode.languages.createDiagnosticCollection("html");
 
 	vscode.window.onDidChangeTextEditorSelection((event) => {
@@ -24,98 +22,62 @@ function activate(context) {
 
 	context.subscriptions.push(hoverDisposable);
 
-	const htmlEntities = {
-		"<": "&lt;",
-		">": "&gt;",
-		"&": "&amp;",
-		'"': "&quot;",
-		"'": "&apos;",
-		"=": "&equals;",
-		"≠": "&ne;",
-		"≅": "&cong;",
-		"≈": "&asymp;",
-		"+": "&plus;",
-		"¢": "&cent;",
-		"×": "&times;",
-		"÷": "&divide;",
-		"≤": "&le;",
-		"≥": "&ge;",
-		"±": "&plusmn;",
-		"°": "&deg;",
-		Ω: "&ohm;",
-		"…": "&hellip;",
-		Δ: "&Delta;",
-		"∠": "&ang;",
-		π: "&pi;",
-		"⊥": "&perp;",
-		φ: "&phi;",
-		"¯": "&macr;",
-		θ: "&theta;",
-		μ: "&mu;",
-		µ: "&micro;",
-		"′": "&prime;",
-		"″": "&Prime;",
-		"∼": "&sim;",
-		"√": "&radic;",
-		"❘": "&VerticalSeparator;",
-		"|": "&verbar;",
-		"−": "&minus;",
-		"—": "&mdash;",
-		"–": "&ndash;",
-		"‘": "&lsquo;",
-		"’": "&rsquo;",
-		"“": "&ldquo;",
-		"”": "&rdquo;",
-		"■": "&FilledVerySmallSquare;",
-		"◼": "&FilledSmallSquare;",
-		"→": "&rarr;",
-		"←": "&larr;",
-		"™": "&trade;",
-		"®": "&reg;",
-		"©": "&copy;",
-		é: "&eacute;",
-		è: "&egrave;",
-		ê: "&ecirc;",
-		É: "&Eacute;",
-		á: "&aacute;",
-		â: "&acirc;",
-		à: "&agrave;",
-		À: "&Agrave;",
-		ā: "&amacr;",
-		û: "&ucirc;",
-		ü: "&uuml;",
-		ú: "&uacute;",
-		ù: "&ugrave;",
-		ñ: "&ntilde;",
-		ó: "&oacute;",
-		î: "&icirc;",
-		ï: "&iuml;",
-		Í: "&Iacute;",
-		í: "&iacute;",
-		ç: "&ccedil;",
-		"•": "&bull;",
-		"€": "&euro;",
-		"£": "&pound;",
-		"¥": "&yen;",
-		"§": "&sect;",
-		"«": "&laquo;",
-		"»": "&raquo;",
-		// Add more entities as needed
-	};
+	let isInProgress = false;
 
-	//includes validation, heading hierarchy, and scripts.
-	const checkMarkup = vscode.commands.registerCommand("nellie.checkHTML", () =>
-		htmlValidation(diagnosticCollection)
+	try {
+		updateWorkspaceSettings();
+		isInProgress = true;
+	} catch (error) {
+		vscode.window.showErrorMessage(`Error applying settings: ${error.message}`);
+	} finally {
+		isInProgress = false;
+	}
+
+	//includes 1) validation, 2) heading hierarchy, and 3) scripts.
+	const checkMarkup = vscode.commands.registerCommand(
+		"nellie.checkHTML",
+		() => {
+			try {
+				htmlValidation(diagnosticCollection, isInProgress);
+				isInProgress = true;
+			} catch (error) {
+				vscode.window.showErrorMessage(
+					`Error validating HTML: ${error.message}`
+				);
+			} finally {
+				isInProgress = false;
+			}
+		}
 	);
 
 	const checkEntities = vscode.commands.registerCommand(
 		"nellie.checkEntities",
-		() => entityChecker(htmlEntities)
+		() => {
+			try {
+				entityChecker(diagnosticCollection, isInProgress);
+				isInProgress = true;
+			} catch (error) {
+				vscode.window.showErrorMessage(
+					`Error checking entities: ${error.message}`
+				);
+			} finally {
+				isInProgress = false;
+			}
+		}
 	);
 
-	const checkArt = vscode.commands.registerCommand("nellie.checkArt", () =>
-		artChecker()
-	);
+	const checkArt = vscode.commands.registerCommand("nellie.checkArt", () => {
+		try {
+			artChecker(diagnosticCollection, isInProgress);
+			isInProgress = true;
+		} catch (error) {
+			vscode.window.showErrorMessage(
+				`Error checking art properties: ${error.message}`
+			);
+		} finally {
+			isInProgress = false;
+		}
+	});
 
 	context.subscriptions.push(checkMarkup);
 	context.subscriptions.push(checkEntities);

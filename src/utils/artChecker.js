@@ -3,7 +3,12 @@ const fs = require("fs");
 const path = require("path");
 const sizeOf = require("image-size").default;
 
-function artChecker() {
+function artChecker(diagnosticCollection, isInProgress) {
+	if (isInProgress) {
+		vscode.window.showWarningMessage("Art checking is already in progress.");
+		return;
+	}
+
 	const workspaceFolders = vscode.workspace.workspaceFolders;
 	if (workspaceFolders) {
 		const rootPath = workspaceFolders[0].uri.fsPath;

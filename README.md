@@ -17,6 +17,11 @@
 ## Features
 
 <div align="center">
+    <strong>Workspace Settings</strong>
+</div>
+Automatically updates all workspace settings to Nelson specifications.
+
+<div align="center">
     <strong>HTML Validation</strong>
 </div>
 Validates the markup, checks the heading hierarchy, and verifies if there are any unused scripts.
@@ -40,16 +45,15 @@ Prompts you to select a manuscript file and confirms if all text is converted co
 
 The first copyright symbol should be omitted from the entity checker.<br>
 Initiating 2 concurrent instances should not be allowed.<br>
+Check for non-unique ids.<br>
 
 ### Planned
 
 6 hours = Checks if the document follows best practices (e.g., filenames).<br>
-8 hours = Cross-checks consistency errors against the word manuscript file and markup (e.g., italic and bold words).<br>
-8 hours = Defaults the formatting to nelson.workspace when the language is HTML.<br>
 
 ### In Progress
 
-6 hours = Checks for missing and unused scripts.<br>
+8 hours = Cross-checks consistency errors against the word manuscript file and markup (e.g., italic and bold words).<br>
 
 ### Completed
 
@@ -57,6 +61,8 @@ On top of all the HTML Validator checks +<br>
 8 hours = Checks if non-converted HTML entities are in the markup.<br>
 4 hours = Checks the heading hierarchy (avoids the media player issue).<br>
 8 hours = Checks if all images are sized appropriately.<br>
+6 hours = Checks for missing and unused scripts.<br>
+8 hours = Defaults the formatting to nelson.workspace when the language is HTML.<br>
 
 ## Total Time Needed
 

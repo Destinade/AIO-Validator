@@ -1,6 +1,90 @@
 const vscode = require("vscode");
 
-function entityChecker(htmlEntities) {
+function entityChecker(diagnosticCollection, isInProgress) {
+	if (isInProgress) {
+		vscode.window.showWarningMessage("Entity checking is already in progress.");
+		return;
+	}
+
+	const htmlEntities = {
+		"<": "&lt;",
+		">": "&gt;",
+		"&": "&amp;",
+		'"': "&quot;",
+		"'": "&apos;",
+		"=": "&equals;",
+		"≠": "&ne;",
+		"≅": "&cong;",
+		"≈": "&asymp;",
+		"+": "&plus;",
+		"¢": "&cent;",
+		"×": "&times;",
+		"÷": "&divide;",
+		"≤": "&le;",
+		"≥": "&ge;",
+		"±": "&plusmn;",
+		"°": "&deg;",
+		Ω: "&ohm;",
+		"…": "&hellip;",
+		Δ: "&Delta;",
+		"∠": "&ang;",
+		π: "&pi;",
+		"⊥": "&perp;",
+		φ: "&phi;",
+		"¯": "&macr;",
+		θ: "&theta;",
+		μ: "&mu;",
+		µ: "&micro;",
+		"′": "&prime;",
+		"″": "&Prime;",
+		"∼": "&sim;",
+		"√": "&radic;",
+		"❘": "&VerticalSeparator;",
+		"|": "&verbar;",
+		"−": "&minus;",
+		"—": "&mdash;",
+		"–": "&ndash;",
+		"‘": "&lsquo;",
+		"’": "&rsquo;",
+		"“": "&ldquo;",
+		"”": "&rdquo;",
+		"■": "&FilledVerySmallSquare;",
+		"◼": "&FilledSmallSquare;",
+		"→": "&rarr;",
+		"←": "&larr;",
+		"™": "&trade;",
+		"®": "&reg;",
+		"©": "&copy;",
+		é: "&eacute;",
+		è: "&egrave;",
+		ê: "&ecirc;",
+		É: "&Eacute;",
+		á: "&aacute;",
+		â: "&acirc;",
+		à: "&agrave;",
+		À: "&Agrave;",
+		ā: "&amacr;",
+		û: "&ucirc;",
+		ü: "&uuml;",
+		ú: "&uacute;",
+		ù: "&ugrave;",
+		ñ: "&ntilde;",
+		ó: "&oacute;",
+		î: "&icirc;",
+		ï: "&iuml;",
+		Í: "&Iacute;",
+		í: "&iacute;",
+		ç: "&ccedil;",
+		"•": "&bull;",
+		"€": "&euro;",
+		"£": "&pound;",
+		"¥": "&yen;",
+		"§": "&sect;",
+		"«": "&laquo;",
+		"»": "&raquo;",
+		// Add more entities as needed
+	};
+
 	const editor = vscode.window.activeTextEditor;
 	if (!editor) {
 		vscode.window.showErrorMessage("No active text editor.");
@@ -52,7 +136,12 @@ function entityChecker(htmlEntities) {
 		index++;
 
 		vscode.window
-			.showInformationMessage(`Convert "${char}" to "${entity}"?`, "Yes", "No")
+			.showInformationMessage(
+				`Convert "${char}" to "${entity}"?`,
+				"Yes",
+				"No",
+				"Exit"
+			)
 			.then((choice) => {
 				if (choice === "Yes") {
 					editor
@@ -62,12 +151,13 @@ function entityChecker(htmlEntities) {
 						.then(() => {
 							processNextCharacter();
 						});
+				} else if (choice === "Exit") {
+					return;
 				} else {
 					processNextCharacter();
 				}
 			});
 	}
-
 	processNextCharacter();
 }
 
