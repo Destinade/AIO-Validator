@@ -4,7 +4,7 @@
 	"displayName": "Validator Nellie",
 	"description": "Validates the HTML code with more complex methods.",
 	"icon": "src/assets/images/nellie-icon.png",
-	"version": "0.6.1",
+	"version": "0.7.1",
 	"engines": {
 		"vscode": "^1.90.0"
 	},
