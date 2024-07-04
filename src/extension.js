@@ -5,10 +5,13 @@ const hoverDisposable = require("./utils/hoverDisposable");
 const htmlValidation = require("./utils/htmlValidation");
 const entityChecker = require("./utils/entityChecker");
 const artChecker = require("./utils/artChecker");
+const updateWorkspaceSettings = require("./utils/workspaceSettings.js");
 
 let diagnosticCollection;
 
 function activate(context) {
+	updateWorkspaceSettings();
+
 	diagnosticCollection = vscode.languages.createDiagnosticCollection("html");
 
 	vscode.window.onDidChangeTextEditorSelection((event) => {
